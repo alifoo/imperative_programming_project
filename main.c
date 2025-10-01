@@ -29,6 +29,11 @@ typedef struct {
 
 Alimento alimentos[MAX_LINES];
 
+// protótipos das funções da lorena
+void listar_topN_energia(const Alimento vet[], int tamanho);
+void listar_topN_proteina(const Alimento vet[], int tamanho);
+void listar_topN_carboidrato(const Alimento vet[], int tamanho);
+
 Categoria categoria_from_string(const char *str) {
     if (strcmp(str, "Cereais e derivados") == 0)
         return CEREAIS_DERIVADOS;
@@ -95,6 +100,19 @@ Alimento parse_csv_line(char *line) {
     return a;
 }
 
+// lorena: converte enum Categoria em string para print
+const char* categoria_nome(Categoria c) {
+    switch (c) {
+        case CEREAIS_DERIVADOS:   return "Cereais e derivados";
+        case FRUTAS:              return "Frutas";
+        case VERDURAS_HORTALICAS: return "Verduras e hortaliças";
+        case CARNES:              return "Carnes e derivados";
+        case LATICINIOS:          return "Leite e derivados";
+        case LEGUMINOSAS:         return "Leguminosas e derivados";
+        default:                  return "Outros";
+    }
+}
+
 int menu() {
     printf("                                        \n");
     printf(
@@ -140,13 +158,13 @@ int menu() {
             printf("Apague esse printf e coloque sua função\n");
             break;
         case '5':
-            printf("Apague esse printf e coloque sua função\n");
+            listar_topN_energia(alimentos, MAX_LINES); // lorena: função e
             break;
         case '6':
-            printf("Apague esse printf e coloque sua função\n");
+            listar_topN_proteina(alimentos, MAX_LINES); // lorena: função f
             break;
         case '7':
-            printf("Apague esse printf e coloque sua função\n");
+           listar_topN_carboidrato(alimentos, MAX_LINES); // lorena: função g
             break;
         case '8':
             printf("Apague esse printf e coloque sua função\n");
@@ -167,7 +185,7 @@ void print_tabela(int line_count) {
         printf("%d | %s | %.1f | %d | %.1f | %.1f | %s\n", alimentos[i].numero,
                alimentos[i].descricao, alimentos[i].umidade,
                alimentos[i].energia, alimentos[i].proteina,
-               alimentos[i].carboidrato, alimentos[i].categoria);
+               alimentos[i].carboidrato, categoria_nome(alimentos[i].categoria)); // lorena: usei a função categoria_nome para printar o nome
     }
 }
 
