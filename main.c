@@ -195,7 +195,7 @@ int tamanho_vetor_filtrado(Alimento vet[], int tamanho_vet,
                            const char *categoria_escolhida) {
     int count = 0;
     for (int i = 0; i < tamanho_vet; i++) {
-        if (strcmp(vet[i].categoria, categoria_escolhida) == 0) {
+        if (strcmp(categoria_nome(vet[i].categoria), categoria_escolhida) == 0) { // lorena: categoria_nome para sair em string
             count++;
         }
     }
